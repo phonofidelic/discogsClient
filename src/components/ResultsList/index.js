@@ -10,7 +10,7 @@ const styles = theme => ({
 		width: '100%',
     // maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
-    margin: 50,
+    // margin: 50,
 	}
 });
 

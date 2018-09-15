@@ -20,7 +20,11 @@ class ResultsListItem extends Component {
 		}
 
 		return (
-			<ListItem item={item}>
+			<ListItem 
+				item={item} 
+				button
+				divider
+			>
 				<Avatar 
 					style={styles.avatar}
 					alt={item.title}
