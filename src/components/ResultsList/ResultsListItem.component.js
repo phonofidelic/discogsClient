@@ -13,12 +13,16 @@ class ResultsListItem extends Component {
 		const styles = {
 			root: {
 
+			},
+			avatar: {
+				borderRadius: item.type === 'artist' ? 100 : 1.5,
 			}
 		}
 
 		return (
 			<ListItem item={item}>
 				<Avatar 
+					style={styles.avatar}
 					alt={item.title}
 					src={item.thumb}
 				/>

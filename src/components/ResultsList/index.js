@@ -8,8 +8,9 @@ import ResultsListItem from './ResultsListItem.component';
 const styles = theme => ({
 	root: {
 		width: '100%',
-    maxWidth: 360,
+    // maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
+    margin: 50,
 	}
 });
 

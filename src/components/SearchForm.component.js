@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { 
+	Button,
+	TextField 
+} from '@material-ui/core';
 
 class SearchForm extends Component {
 	constructor(props) {
@@ -31,14 +35,25 @@ class SearchForm extends Component {
 			// handleFetchFailure,
 		} = this.props;
 
+		const styles = {
+			root: {
+				padding: 20,
+			}
+		}
+
 		return (
-			<form  onSubmit={this.handleSubmit.bind(this)}>
-				<input 
+			<form 
+				style={styles.root} 
+				onSubmit={this.handleSubmit.bind(this)}
+			>
+				<TextField 
 					onChange={this.handleInputChange.bind(this)} 
 				/>
-				<input 
+				<Button 
 					type="submit" 
-				/>
+				>
+				Submit
+				</Button>
 			</form>
 		);
 	}
