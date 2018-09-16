@@ -8,7 +8,10 @@ import {
 
 class ResultsListItem extends Component {
 	render() {
-		const {	item } = this.props;
+		const {	
+			item,
+			handleSelectItem,
+		} = this.props;
 
 		const styles = {
 			root: {
@@ -21,9 +24,9 @@ class ResultsListItem extends Component {
 
 		return (
 			<ListItem 
-				item={item} 
 				button
 				divider
+				onClick={() => handleSelectItem(item)}
 			>
 				<Avatar 
 					style={styles.avatar}
@@ -40,7 +43,8 @@ class ResultsListItem extends Component {
 }
 
 ResultsListItem.propTypes = {
-	item: PropTypes.object.isRequired
+	item: PropTypes.object.isRequired,
+	handleSelectItem: PropTypes.func.isRequired,
 }
 
 export default ResultsListItem;

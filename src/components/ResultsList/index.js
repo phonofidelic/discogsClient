@@ -16,13 +16,21 @@ const styles = theme => ({
 
 class ResultsList extends Component {
 	render() {
-		const { results, classes } = this.props;
+		const { 
+			results, 
+			handleSelectItem,
+			classes ,
+		} = this.props;
 
 		return (
 			<div className={classes.root}>
 				<List>
 					{results && results.map((item, i) => (
-						<ResultsListItem key={i} item={item} />
+						<ResultsListItem 
+							key={i} 
+							item={item} 
+							handleSelectItem={handleSelectItem}
+						/>
 					))}
 				</List>
 			</div>
@@ -31,7 +39,8 @@ class ResultsList extends Component {
 }
 
 ResultsList.propTypes = {
-	results: PropTypes.array
+	results: PropTypes.array,
+	handleSelectItem: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(ResultsList);
