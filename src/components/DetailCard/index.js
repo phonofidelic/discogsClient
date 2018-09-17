@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
+	Button,
 	Dialog,
 	DialogActions,
 	DialogContent,
@@ -60,6 +61,9 @@ class DetailCard extends Component {
 					<DialogContentText style={styles.dialogContentText}>
 						{detailViewData.profile || 'No discription found'}
 					</DialogContentText>
+					<DialogActions>
+						<Button onClick={() => handleCloseDetailView()}>Close</Button>
+					</DialogActions>
 				</DialogContent>
 			</Dialog>
 		);

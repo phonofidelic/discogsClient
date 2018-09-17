@@ -2,22 +2,46 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { MOCK_DATA, MOCK_DETAIL_DATA } from '../mockData';
 
-import SearchForm from '../components/SearchForm.component';
+import SearchForm from '../components/SearchForm';
 import ResultsList from '../components/ResultsList';
 import DetailCard from '../components/DetailCard';
+import StatusMessage from '../components/StatusMessage';
 
 const DISCOGS_BASE_URL = 'https://api.discogs.com/';
 const TOKEN = 'lZVtMlqqTwdKFsGhQfliTSBvVdxYpgmqXwqeNnov';
 
+const MOCK_RESULTS = MOCK_DATA.results;
+const MOCK_SELECTED_ITEM = MOCK_DATA.results[0];
+const MOCK_DETAIL_VIEW_DATA = {...MOCK_DETAIL_DATA, cover_image: MOCK_DATA.results[0].cover_image,};
+
 class DiscogsBrowser extends Component {
 	state = {
-		results: MOCK_DATA.results,
-		selectedItem: MOCK_DATA.results[0],
-		detailViewData: {...MOCK_DETAIL_DATA, cover_image: MOCK_DATA.results[0].cover_image,},
+		status: {
+			loading: false,
+			error: false,
+			message: null,
+		},
+		results: MOCK_RESULTS,
+		selectedItem: MOCK_SELECTED_ITEM,
+		detailViewData: MOCK_DETAIL_VIEW_DATA,
 		showDetailView: true,
 	}
+
 	handleFetchData(query) {
 		console.log('handleFetchData, query:', query)
+		/***
+		 * Initial Discogs search request,
+		 * set status object 
+		 */
+		this.setState({
+			...this.state,
+			status: {
+				...this.state.status,
+				loading: true,
+				message: `Searching Discogs for "${query}"...`,
+			}
+		});
+
 
 		axios.get(`${DISCOGS_BASE_URL}database/search?q=${query}&token=${TOKEN}`)
 		.then(response => {
@@ -29,6 +53,14 @@ class DiscogsBrowser extends Component {
 		})
 		.catch(err => {
 			console.log('Discogs error:', err);
+			this.setState({
+				...this.state,
+				status: {
+					loading: false,
+					error: true,
+					message: 'Sorry, could not retrieve search results at this time.'
+				}
+			})
 		});
 	}
 
@@ -46,6 +78,15 @@ class DiscogsBrowser extends Component {
 			});
 		}
 
+		this.setState({
+			...this.state,
+			status: {
+				...this.state.status,
+				loading: true,
+				message: `Fetching details...`,
+			}
+		});
+
 		axios.get(`${DISCOGS_BASE_URL}${item.type}s/${item.id}`)
 		.then(results => {
 			console.log('handleSelectItem, results:', results);
@@ -62,6 +103,15 @@ class DiscogsBrowser extends Component {
 		})
 		.catch(err => {
 			console.error('handleSelectItem error:', err);
+
+			this.setState({
+				...this.state,
+				status: {
+					loading: false,
+					error: true,
+					message: 'Sorry, could not retrieve details at this time.'
+				}
+			})
 		});
 	}
 
@@ -73,9 +123,24 @@ class DiscogsBrowser extends Component {
 		});
 	}
 
+	handleDiscardError() {
+		this.setState({
+			...this.state,
+			status: {
+				...this.state.status,
+				error: false,
+				message: null,
+			}
+		})
+	}
+
 	render() {
 		return (
 			<div>
+				<StatusMessage 
+					status={this.state.status} 
+					handleDiscardError={this.handleDiscardError.bind(this)}
+				/>
 				<SearchForm handleFetchData={this.handleFetchData.bind(this)} />
 				<ResultsList 
 					results={this.state.results} 

@@ -1,29 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import { List } from '@material-ui/core';
+import { THEME } from '../../config';
 
 import ResultsListItem from './ResultsListItem.component';
-
-const styles = theme => ({
-	root: {
-		width: '100%',
-    // maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-    // margin: 50,
-	}
-});
 
 class ResultsList extends Component {
 	render() {
 		const { 
 			results, 
 			handleSelectItem,
-			classes ,
 		} = this.props;
 
+		const styles = {
+			root: {
+				// marginTop: THEME.dimensions.header.height
+			}
+		}
+
 		return (
-			<div className={classes.root}>
+			<div style={styles.root}>
 				<List>
 					{results && results.map((item, i) => (
 						<ResultsListItem 
@@ -43,4 +39,4 @@ ResultsList.propTypes = {
 	handleSelectItem: PropTypes.func.isRequired,
 }
 
-export default withStyles(styles)(ResultsList);
+export default ResultsList;

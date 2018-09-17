@@ -4,6 +4,7 @@ import {
 	Button,
 	TextField 
 } from '@material-ui/core';
+import { THEME } from '../../config';
 
 class SearchForm extends Component {
 	constructor(props) {
@@ -38,6 +39,12 @@ class SearchForm extends Component {
 		const styles = {
 			root: {
 				padding: 20,
+				// position: 'fixed',
+				// zIndex: 1001,
+				// width: '100%',
+				// top: THEME.dimensions.header.height,
+				marginTop: THEME.dimensions.header.height,
+				backgroundColor: '#fff',
 			}
 		}
 
