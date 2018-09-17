@@ -45,6 +45,9 @@ class SearchForm extends Component {
 				// top: THEME.dimensions.header.height,
 				marginTop: THEME.dimensions.header.height,
 				backgroundColor: '#fff',
+			},
+			searchField: {
+				marginRight: 10
 			}
 		}
 
@@ -54,6 +57,9 @@ class SearchForm extends Component {
 				onSubmit={this.handleSubmit.bind(this)}
 			>
 				<TextField 
+					style={styles.searchField}
+					autoFocus
+					label="Find your music"
 					onChange={this.handleInputChange.bind(this)} 
 				/>
 				<Button 
