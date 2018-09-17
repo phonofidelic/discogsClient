@@ -4,12 +4,16 @@ import { List } from '@material-ui/core';
 import { THEME } from '../../config';
 
 import ResultsListItem from './ResultsListItem.component';
+import Pagination from './Pagination.component';
 
 class ResultsList extends Component {
 	render() {
 		const { 
-			results, 
+			results,
+			pagination,
 			handleSelectItem,
+			handlePaginationRequest,
+			handleShowMore,
 		} = this.props;
 
 		const styles = {
@@ -29,6 +33,11 @@ class ResultsList extends Component {
 						/>
 					))}
 				</List>
+				<Pagination 
+					pagination={pagination} 
+					handlePaginationRequest={handlePaginationRequest} 
+					handleShowMore={handleShowMore}
+				/>
 			</div>
 		);
 	}
@@ -36,7 +45,10 @@ class ResultsList extends Component {
 
 ResultsList.propTypes = {
 	results: PropTypes.array,
+	pagination: PropTypes.object.isRequired,
 	handleSelectItem: PropTypes.func.isRequired,
+	handlePaginationRequest: PropTypes.func.isRequired,
+	handleShowMore: PropTypes.func.isRequired,
 }
 
 export default ResultsList;

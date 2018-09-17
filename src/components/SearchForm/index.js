@@ -59,7 +59,7 @@ class SearchForm extends Component {
 				<Button 
 					type="submit" 
 				>
-				Submit
+				Search
 				</Button>
 			</form>
 		);

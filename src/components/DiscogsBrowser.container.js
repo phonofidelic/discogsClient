@@ -22,6 +22,7 @@ class DiscogsBrowser extends Component {
 			message: null,
 		},
 		results: MOCK_RESULTS,
+		pagination: MOCK_DATA.pagination,
 		selectedItem: MOCK_SELECTED_ITEM,
 		detailViewData: MOCK_DETAIL_VIEW_DATA,
 		showDetailView: true,
@@ -48,7 +49,8 @@ class DiscogsBrowser extends Component {
 			console.log('response:', response);
 			this.setState({
 				...this.state,
-				results: response.data.results
+				results: response.data.results,
+				pagination: response.data.pagination,
 			});
 		})
 		.catch(err => {
@@ -115,6 +117,70 @@ class DiscogsBrowser extends Component {
 		});
 	}
 
+	handlePaginationRequest(url) {
+		return console.log('handlePaginationRequest, url:', url)
+
+		this.setState({
+			status: {
+				loading: true,
+				message: 'Doading Discogs results...'
+			}
+		});
+
+		axios.get(url)
+		.then(response => {
+			console.log('response:', response);
+			this.setState({
+				...this.state,
+				results: response.data.results,
+				pagination: response.data.pagination,
+			});
+		})
+		.catch(err => {
+			console.log('Discogs error:', err);
+			this.setState({
+				...this.state,
+				status: {
+					loading: false,
+					error: true,
+					message: 'Sorry, could not retrieve search results at this time.'
+				}
+			})
+		});
+	}
+
+	handleShowMore(url) {
+		return console.log('handlePaginationRequest, url:', url)
+
+		this.setState({
+			status: {
+				loading: true,
+				message: 'Doading Discogs results...'
+			}
+		});
+
+		axios.get(url)
+		.then(response => {
+			console.log('response:', response);
+			this.setState({
+				...this.state,
+				results: [...this.status.results, response.data.results],
+				pagination: response.data.pagination,
+			});
+		})
+		.catch(err => {
+			console.log('Discogs error:', err);
+			this.setState({
+				...this.state,
+				status: {
+					loading: false,
+					error: true,
+					message: 'Sorry, could not retrieve search results at this time.'
+				}
+			})
+		});
+	}
+
 	handleCloseDetailView() {
 		console.log('handleCloseDetailView')
 		this.setState({
@@ -144,8 +210,11 @@ class DiscogsBrowser extends Component {
 				<SearchForm handleFetchData={this.handleFetchData.bind(this)} />
 				<ResultsList 
 					results={this.state.results} 
+					pagination={this.state.pagination}
 					handleSelectItem={this.handleSelectItem.bind(this)}
 					handleCloseDetailView={this.handleCloseDetailView.bind(this)}
+					handlePaginationRequest={this.handlePaginationRequest.bind(this)}
+					handleShowMore={this.handleShowMore.bind(this)}
 				/>
 				{this.state.detailViewData && 
 					<DetailCard 

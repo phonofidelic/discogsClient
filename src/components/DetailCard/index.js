@@ -47,6 +47,7 @@ class DetailCard extends Component {
 			<Dialog
 				open={showDetailView}
 				scroll="paper"
+				fullScreen={navigator.userAgent.indexOf('Mobile') > 0}
 				onBackdropClick={() => handleCloseDetailView()}
 			>
 				<DialogContent style={styles.dialogContent}>

@@ -2,7 +2,7 @@ export const MOCK_DATA = {
 	"pagination": {
 		"per_page": 50, 
 		"pages": 200, 
-		"page": 1, 
+		"page": 2, 
 		"urls": {
 			"last": "https://api.discogs.com/database/search?q=devo&per_page=50&token=lZVtMlqqTwdKFsGhQfliTSBvVdxYpgmqXwqeNnov&page=200", 
 			"next": "https://api.discogs.com/database/search?q=devo&per_page=50&token=lZVtMlqqTwdKFsGhQfliTSBvVdxYpgmqXwqeNnov&page=2"
