@@ -31,20 +31,22 @@ class SearchForm extends Component {
 
 	render() {
 		const {
+			results,
 			handleFetchData,
-			// handleFetchSuccess,
-			// handleFetchFailure,
 		} = this.props;
 
 		const styles = {
 			root: {
 				padding: 20,
-				// position: 'fixed',
-				// zIndex: 1001,
-				// width: '100%',
-				// top: THEME.dimensions.header.height,
+				height: results ? null : 100,
 				marginTop: THEME.dimensions.header.height,
 				backgroundColor: '#fff',
+			},
+			root_noResults: {
+				height: '100vh',
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'center',
 			},
 			searchField: {
 				marginRight: 10
@@ -53,9 +55,10 @@ class SearchForm extends Component {
 
 		return (
 			<form 
-				style={styles.root} 
+				style={!results ? styles.root_noResults : styles.root} 
 				onSubmit={this.handleSubmit.bind(this)}
 			>
+			<div>
 				<TextField 
 					style={styles.searchField}
 					autoFocus
@@ -67,15 +70,15 @@ class SearchForm extends Component {
 				>
 				Search
 				</Button>
+			</div>
 			</form>
 		);
 	}
 }
 
 SearchForm.propTypes ={
+	results: PropTypes.array,
 	handleFetchData: PropTypes.func.isRequired,
-	// handleFetchSuccess: PropTypes.func.isRequired,
-	// handleFetchFailure: PropTypes.func.isRequired,
 }
 
 export default SearchForm;

@@ -226,7 +226,10 @@ class DiscogsBrowser extends Component {
 					status={this.state.status} 
 					handleDiscardError={this.handleDiscardError.bind(this)}
 				/>
-				<SearchForm handleFetchData={this.handleFetchData.bind(this)} />
+				<SearchForm 
+					results={this.state.results}
+					handleFetchData={this.handleFetchData.bind(this)} 
+				/>
 				<ResultsList 
 					results={this.state.results} 
 					pagination={this.state.pagination}
