@@ -8,7 +8,7 @@ import DetailCard from '../components/DetailCard';
 import StatusMessage from '../components/StatusMessage';
 
 const DISCOGS_BASE_URL = 'https://api.discogs.com/';
-const TOKEN = 'lZVtMlqqTwdKFsGhQfliTSBvVdxYpgmqXwqeNnov';
+const TOKEN = process.env.REACT_APP_DISCOGS_TOKEN;
 
 const MOCK_RESULTS = MOCK_DATA.results;
 const MOCK_SELECTED_ITEM = MOCK_DATA.results[0];
@@ -21,7 +21,7 @@ class DiscogsBrowser extends Component {
 			error: false,
 			message: null,
 		},
-		results: MOCK_RESULTS,
+		results: null,
 		pagination: { per_page: 0 },
 		selectedItem: null,
 		detailViewData: null,
