@@ -63,6 +63,7 @@ class DetailCard extends Component {
 						{detailViewData.profile || 'No discription found'}
 					</DialogContentText>
 					<DialogActions>
+						<Button>Import data</Button>
 						<Button onClick={() => handleCloseDetailView()}>Close</Button>
 					</DialogActions>
 				</DialogContent>

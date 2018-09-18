@@ -45,7 +45,6 @@ class Pagination extends Component {
 
 		return (
 			<div style={styles.root}>
-				{/*{this.renderPaginator()}*/}
 				<div>
 					<Button onClick={() => handleShowMore(pagination.urls.next)}>Show more</Button>
 				</div>

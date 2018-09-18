@@ -22,9 +22,9 @@ class DiscogsBrowser extends Component {
 			message: null,
 		},
 		results: MOCK_RESULTS,
-		pagination: MOCK_DATA.pagination,
-		selectedItem: MOCK_SELECTED_ITEM,
-		detailViewData: MOCK_DETAIL_VIEW_DATA,
+		pagination: { per_page: 0 },
+		selectedItem: null,
+		detailViewData: null,
 		showDetailView: true,
 	}
 
@@ -49,6 +49,11 @@ class DiscogsBrowser extends Component {
 			console.log('response:', response);
 			this.setState({
 				...this.state,
+				status: {
+					...this.state.status,
+					loading: false,
+					message: null,
+				},
 				results: response.data.results,
 				pagination: response.data.pagination,
 			});
@@ -95,6 +100,10 @@ class DiscogsBrowser extends Component {
 
 			this.setState({
 				...this.state,
+				status: {
+					loading: false,
+					message: null,
+				},
 				selectedItem: item,
 				detailViewData: {
 					...results.data,
@@ -150,7 +159,7 @@ class DiscogsBrowser extends Component {
 	}
 
 	handleShowMore(url) {
-		return console.log('handlePaginationRequest, url:', url)
+		// return console.log('handlePaginationRequest, url:', url)
 
 		this.setState({
 			status: {
@@ -164,8 +173,18 @@ class DiscogsBrowser extends Component {
 			console.log('response:', response);
 			this.setState({
 				...this.state,
-				results: [...this.status.results, response.data.results],
-				pagination: response.data.pagination,
+				status: {
+					...this.state.status,
+					loading: false,
+				},
+				results: [
+					...this.state.results,
+					...response.data.results
+				],
+				pagination: {
+					...this.state.pagination,
+					per_page: this.state.pagination.per_page += response.data.pagination.per_page,
+				},
 			});
 		})
 		.catch(err => {

@@ -33,11 +33,13 @@ class ResultsList extends Component {
 						/>
 					))}
 				</List>
-				<Pagination 
-					pagination={pagination} 
-					handlePaginationRequest={handlePaginationRequest} 
-					handleShowMore={handleShowMore}
-				/>
+				{pagination.per_page > 0 &&
+					<Pagination 
+						pagination={pagination} 
+						handlePaginationRequest={handlePaginationRequest} 
+						handleShowMore={handleShowMore}
+					/>
+				}
 			</div>
 		);
 	}
@@ -45,7 +47,7 @@ class ResultsList extends Component {
 
 ResultsList.propTypes = {
 	results: PropTypes.array,
-	pagination: PropTypes.object.isRequired,
+	pagination: PropTypes.object,
 	handleSelectItem: PropTypes.func.isRequired,
 	handlePaginationRequest: PropTypes.func.isRequired,
 	handleShowMore: PropTypes.func.isRequired,
