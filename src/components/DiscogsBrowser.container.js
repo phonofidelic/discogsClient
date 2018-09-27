@@ -44,7 +44,13 @@ class DiscogsBrowser extends Component {
 		});
 
 
-		axios.get(`${DISCOGS_BASE_URL}database/search?q=${query}&token=${TOKEN}`)
+		axios.get(`${DISCOGS_BASE_URL}database/search?q=${query}&token=${TOKEN}`,
+		{
+			httpsAgent: 'discogsClient +https://github.com/phonofidelic/discogsClient', 
+			// headers: {
+			// 'User-Agent': 'discogsClient +https://github.com/phonofidelic/discogsClient'
+			// }
+		})
 		.then(response => {
 			console.log('response:', response);
 			this.setState({
