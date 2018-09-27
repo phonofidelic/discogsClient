@@ -47,6 +47,7 @@ class SearchForm extends Component {
 				display: 'flex',
 				alignItems: 'center',
 				justifyContent: 'center',
+				backgroundColor: '#fff',
 			},
 			searchField: {
 				marginRight: 10
@@ -61,6 +62,7 @@ class SearchForm extends Component {
 			<div>
 				<TextField 
 					style={styles.searchField}
+					type="text"
 					autoFocus
 					label="Find your music"
 					onChange={this.handleInputChange.bind(this)} 

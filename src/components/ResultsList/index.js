@@ -19,6 +19,7 @@ class ResultsList extends Component {
 		const styles = {
 			root: {
 				// marginTop: THEME.dimensions.header.height
+				backgroundColor: '#fff',
 			}
 		}
 

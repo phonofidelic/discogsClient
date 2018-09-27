@@ -7,4 +7,10 @@ export const THEME = {
 			height: 76,
 		},
 	},
+	palette: {
+		type: 'light',
+		primary: {
+			main: '#ccc'
+		}
+	},
 }
